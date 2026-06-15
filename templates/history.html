@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Prediction History</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>📋 Prediction History</h1>
+
+    <br>
+
+    <table border="1" cellpadding="12" cellspacing="0" width="100%">
+
+    <tr style="background:#1976d2;color:white;">
+        <th>Date & Time</th>
+        <th>Symptoms</th>
+        <th>Disease</th>
+        <th>Confidence</th>
+        <th>Action</th>
+    </tr>
+
+    {% for row in history %}
+
+    <tr>
+
+        <td>{{ row["date_time"] }}</td>
+
+        <td>{{ row["symptoms"] }}</td>
+
+        <td>{{ row["disease"] }}</td>
+
+        <td>{{ row["confidence"] }}%</td>
+
+        <td>
+            <a href="{{ url_for('delete_history', id=row['id']) }}">
+                <button style="background:red;color:white;">
+                    Delete
+                </button>
+            </a>
+        </td>
+
+    </tr>
+
+    {% endfor %}
+
+</table>
+    <br><br>
+
+    <a href="{{ url_for('home') }}">
+
+        <button>
+
+            ⬅ Back to Home
+
+        </button>
+
+    </a>
+
+</div>
+
+</body>
+
+</html>

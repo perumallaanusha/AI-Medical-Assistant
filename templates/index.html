@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>AI Medical Assistant</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🩺 AI Medical Assistant</h1>
+    <div style="text-align:right;">
+
+    Welcome,
+    <strong>{{ session['user'] }}</strong>
+
+    |
+
+    <a href="/logout">Logout</a>
+
+</div>
+
+<br>
+
+    <p class="disclaimer">
+        This AI assistant is for educational purposes only.
+        Please consult a qualified doctor for medical advice.
+    </p>
+
+    <form method="POST" enctype="multipart/form-data">
+
+        <textarea
+            name="symptom"
+            placeholder="Describe your symptoms here..."
+            required>{{ symptom }}</textarea>
+
+        <br><br>
+
+        <label><strong>📷 Upload Medical Image</strong></label>
+
+        <br><br>
+
+        <input type="file" name="image" accept="image/*">
+
+        {% if image_message %}
+        <p style="color:green;font-weight:bold;">
+            {{ image_message }}
+        </p>
+        {% endif %}
+
+        {% if image_filename %}
+
+        <br>
+
+        <img
+            src="{{ url_for('uploaded_file', filename=image_filename) }}"
+            width="350"
+            style="border-radius:15px;
+                   border:3px solid #ddd;
+                   box-shadow:0px 5px 15px rgba(0,0,0,0.3);">
+
+        {% endif %}
+
+        <br><br>
+
+        <button type="submit">
+            🔍 Analyze Symptoms
+        </button>
+
+    </form>
+
+    <br>
+
+    {% if prediction %}
+
+    <div class="result">
+
+        <h2>🤖 AI Skin Disease Prediction</h2>
+
+        <h1 style="color:#0d6efd;">
+            {{ prediction }}
+        </h1>
+
+        <div class="confidence-box">
+
+            <div class="confidence-title">
+                🤖 AI Confidence
+            </div>
+
+            <div class="confidence-value">
+                {{ confidence }}%
+            </div>
+
+            <div class="confidence-bar">
+                [{{ confidence_bar }}] {{ confidence }}%
+            </div>
+
+        </div>
+
+        <hr>
+
+        <h3>🩺 Description</h3>
+        <p>{{ details.description }}</p>
+
+        <hr>
+
+        <h3>🤒 Symptoms</h3>
+        <ul>
+            {% for item in details.symptoms %}
+            <li>{{ item }}</li>
+            {% endfor %}
+        </ul>
+
+        <hr>
+
+        <h3>🛡️ Precautions</h3>
+        <ul>
+            {% for item in details.precautions %}
+            <li>{{ item }}</li>
+            {% endfor %}
+        </ul>
+
+        <hr>
+
+        <h3>💊 Suggested Medicines</h3>
+        <ul>
+            {% for item in details.medicines %}
+            <li>{{ item }}</li>
+            {% endfor %}
+        </ul>
+
+        <hr>
+
+        <h3>🥗 Recommended Diet</h3>
+        <ul>
+            {% for item in details.diet %}
+            <li>{{ item }}</li>
+            {% endfor %}
+        </ul>
+
+        <hr>
+
+        <h3>👨‍⚕️ Doctor to Consult</h3>
+
+        <h2 style="color:#e91e63;">
+            {{ details.doctor }}
+        </h2>
+
+        <br>
+
+        <a href="{{ url_for('download_report') }}">
+            <button type="button">
+                📄 Download AI Medical Report
+            </button>
+        </a>
+        <br><br>
+
+<a href="{{ url_for('history') }}">
+    <button type="button">
+        📋 View Prediction History
+    </button>
+</a>
+
+    </div>
+
+    {% endif %}
+    
+{% if result %}
+
+<div class="result">
+
+    <h2>🩺 Symptom Analysis</h2>
+
+    <pre>{{ result }}</pre>
+
+</div>
+
+{% endif %}
+
+{% if ai_response %}
+
+<div class="result">
+
+    <h2>🤖 AI Medical Assistant</h2>
+
+    <pre>{{ ai_response }}</pre>
+
+</div>
+
+{% endif %}
+
+</div>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+
+</html>
