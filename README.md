@@ -144,3 +144,37 @@ G. Pulla Reddy Engineering College
 This project is developed for educational purposes only.
 
 It is **NOT** intended to replace professional medical advice. Always consult a qualified healthcare professional.
+
+---
+
+# 📸 Application Screenshots
+
+## 🔐 Login Page
+
+![Login](screenshots/login.png)
+
+---
+
+## 🏠 Home Page
+
+![Home](screenshots/home.png)
+
+---
+
+## 🤖 Skin Disease Prediction
+
+![Prediction 1](screenshots/prediction1.png)
+
+![Prediction 2](screenshots/prediction2.png)
+
+![Prediction 3](screenshots/prediction3.png)
+
+![Prediction 4](screenshots/prediction4.png)
+
+---
+
+## 📋 Prediction History
+
+![History 1](screenshots/history1.png)
+
+![History 2](screenshots/history2.png)
